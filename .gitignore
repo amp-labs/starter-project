@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Avoiding pegging to a version of the UI library
+package-lock.json
+yarn.lock
