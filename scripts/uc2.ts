@@ -45,9 +45,6 @@ const searchResp = await search(
   [{ fieldName: "ticketNumber", operator: "eq", value: ticketNumber }],
 );
 const elapsed = Date.now() - t0;
-
-// Note: the search service uses `omitempty` so a zero-match response
-// is `{}` rather than `{results: []}`. Treat missing results as empty.
 const results = searchResp?.results ?? [];
 
 const incident = results[0];
