@@ -1,33 +1,5 @@
 specVersion: 1.0.0
 integrations:
-  - name: sf-crm-handoff
-    displayName: Salesforce conversation-to-CRM handoff
-    provider: salesforce
-    read:
-      objects:
-        - objectName: contact
-          destination: testWebhook
-          enabled: always
-          requiredFields:
-            - fieldName: email
-            - fieldName: firstname
-              mapToName: firstName
-              mapToDisplayName: First name
-            - fieldName: lastname
-              mapToName: lastName
-              mapToDisplayName: Last name
-            # Consumer-mapped: the consumer picks which Salesforce field
-            # backs the canonical name during installation.
-            - mapToName: phoneNumber
-              mapToDisplayName: Phone number
-              prompt: Which Contact field stores the customer's primary phone number?
-    write:
-      objects:
-        - objectName: case
-        - objectName: task
-    proxy:
-      enabled: true
-
   - name: sn-incident-lookup
     displayName: ServiceNow incident lookup
     provider: serviceNow
@@ -57,3 +29,43 @@ integrations:
           optionalFieldsAuto: all
     proxy:
       enabled: true
+
+  - name: sf-crm-handoff
+    displayName: Salesforce conversation-to-CRM handoff
+    provider: salesforce
+    read:
+      objects:
+        - objectName: contact
+          destination: testWebhook
+          enabled: always
+          requiredFields:
+            - fieldName: email
+            - fieldName: firstname
+              mapToName: firstName
+              mapToDisplayName: First name
+            - fieldName: lastname
+              mapToName: lastName
+              mapToDisplayName: Last name
+            # Consumer-mapped: the consumer picks which Salesforce field
+            # backs the canonical name during installation.
+            - mapToName: phoneNumber
+              mapToDisplayName: Phone number
+              prompt: Which Contact field stores the customer's primary phone number?
+    write:
+      objects:
+        - objectName: case
+        - objectName: task
+    proxy:
+      enabled: true
+
+    subscribe:
+      objects:
+        - objectName: contact
+          destination: testWebhook
+          inheritFieldsAndMapping: true
+          createEvent:
+            enabled: always
+          updateEvent:
+            enabled: always
+            requiredWatchFields:
+              - phoneNumber

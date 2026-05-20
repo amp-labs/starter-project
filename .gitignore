@@ -26,3 +26,6 @@ dist-ssr
 # Avoiding pegging to a version of the UI library
 package-lock.json
 yarn.lock
+
+# Private demo notes - do not ship
+*.private.ts
