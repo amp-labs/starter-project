@@ -25,8 +25,6 @@ function App() {
         consumerRef = "demo-user-id"
         groupName = "demo-company-name"
         groupRef = "demo-company-id"
-        // @ts-expect-error -- opt into wizard variant
-        variant="wizard"
       />
     </AmpersandProvider>
   )

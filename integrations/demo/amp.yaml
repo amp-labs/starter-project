@@ -46,26 +46,17 @@ integrations:
             - fieldName: lastname
               mapToName: lastName
               mapToDisplayName: Last name
+          optionalFields:
             # Consumer-mapped: the consumer picks which Salesforce field
             # backs the canonical name during installation.
             - mapToName: phoneNumber
               mapToDisplayName: Phone number
               prompt: Which Contact field stores the customer's primary phone number?
+          optionalFieldsAuto: all
     write:
       objects:
+        - objectName: contact
         - objectName: case
         - objectName: task
     proxy:
       enabled: true
-
-    subscribe:
-      objects:
-        - objectName: contact
-          destination: testWebhook
-          inheritFieldsAndMapping: true
-          createEvent:
-            enabled: always
-          updateEvent:
-            enabled: always
-            requiredWatchFields:
-              - phoneNumber
