@@ -1,5 +1,5 @@
 import { AmpersandProvider, InstallIntegration } from '@amp-labs/react'
-import '@amp-labs/react/styles'; 
+import '@amp-labs/react/styles';
 
 // You can customize the component's styles here
 // See https://docs.withampersand.com/embeddable-ui-components#customize-styles
@@ -13,13 +13,13 @@ const options = {
 function App() {
 
   // This must match the integration name in integrations/amp.yaml
-  const integration = "hubspotCRM";
+  const integration = "readAndWriteGong";
 
   // You can learn more about the parameters in
   // https://docs.withampersand.com/embeddable-ui-components#install-integration
   return (
     <AmpersandProvider options = {options}>
-      <InstallIntegration 
+      <InstallIntegration
         integration = {integration}
         consumerName = "demo-user-name"
         consumerRef = "demo-user-id"

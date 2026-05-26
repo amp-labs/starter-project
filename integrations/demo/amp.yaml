@@ -14,6 +14,9 @@ integrations:
             - fieldName: id
             - fieldName: title
             - fieldName: media
+              mapToName: myAppMediaField
+            - mapToName: myAppCustomField
+              prompt: Which field do you use to track the call sentiment?
           # All other fields can be optionally selected by the customer
           optionalFieldsAuto: all
           backfill:
