@@ -1,62 +1,28 @@
 specVersion: 1.0.0
 integrations:
-  - name: sn-incident-lookup
-    displayName: ServiceNow incident lookup
-    provider: serviceNow
+  - name: read-write-gong
+    displayName: Gong read and write
+    provider: gong
     read:
       objects:
-        - objectName: now/table/incident
-          destination: testWebhook
-          enabled: always
+        - objectName: calls
+          destination: defaultWebhook # define a webhook in the Ampersand Console
+          schedule: "*/10 * * * *" # Every 10 minutes
+          # List the fields to read for every customer
+          # Field names come from https://gong.app.gong.io/settings/api/documentation#get-/v2/calls
           requiredFields:
-            - fieldName: number
-              mapToName: ticketNumber
-              mapToDisplayName: Ticket number
-            - fieldName: state
-              mapToName: status
-              mapToDisplayName: Status
-            - fieldName: short_description
-              mapToName: summary
-              mapToDisplayName: Summary
-            # Consumer-mapped: callers can be identified by caller_id
-            # (reference to sys_user), a custom email field on Incident,
-            # or another custom field depending on how the customer
-            # uses ServiceNow. The consumer can pick during installation.
-          optionalFields:
-            - mapToName: callerIdentifier
-              mapToDisplayName: Caller identifier
-              prompt: Which Incident field identifies the caller, so we can validate the customer mid-conversation?
+            - fieldName: id
+            - fieldName: title
+            - fieldName: media
+          # All other fields can be optionally selected by the customer
           optionalFieldsAuto: all
-    proxy:
-      enabled: true
+          backfill:
+            defaultPeriod:
+              fullHistory: true
 
-  - name: sf-crm-handoff
-    displayName: Salesforce conversation-to-CRM handoff
-    provider: salesforce
-    read:
-      objects:
-        - objectName: contact
-          destination: testWebhook
-          enabled: always
-          requiredFields:
-            - fieldName: email
-            - fieldName: firstname
-              mapToName: firstName
-              mapToDisplayName: First name
-            - fieldName: lastname
-              mapToName: lastName
-              mapToDisplayName: Last name
-          optionalFields:
-            # Consumer-mapped: the consumer picks which Salesforce field
-            # backs the canonical name during installation.
-            - mapToName: phoneNumber
-              mapToDisplayName: Phone number
-              prompt: Which Contact field stores the customer's primary phone number?
-          optionalFieldsAuto: all
     write:
       objects:
-        - objectName: contact
-        - objectName: case
-        - objectName: task
+        - objectName: calls
+
     proxy:
       enabled: true
