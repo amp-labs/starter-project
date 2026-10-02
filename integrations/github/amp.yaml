@@ -1,7 +1,7 @@
 specVersion: 1.0.0
 integrations:
-  - name: githubGists # If you rename this, you need to update the integration name in src/App.tsx.
-    displayName: GitHub Gists Integration
+  - name: githubIntegration # If you rename this, you need to update the integration name in src/App.tsx.
+    displayName: GitHub Integration
     provider: github
     # Define the objects you want to read.
     # See https://docs.withampersand.com/read-actions for more information.
@@ -11,6 +11,8 @@ integrations:
           destination: defaultWebhook # define your webhook in Ampersand Dashboard.
           schedule: "*/10 * * * *" # Every 10 minutes.
           # These are fields that are always read for every customer.
+          # You can add any field returned by GitHub's gists API, see
+          # https://docs.github.com/en/rest/gists/gists#list-gists-for-the-authenticated-user
           requiredFields:
             - fieldName: id
             - fieldName: description

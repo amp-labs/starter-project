@@ -15,7 +15,7 @@ function App() {
   // This must match the integration name in integrations/amp.yaml
   //   - "hubspotCRM" for integrations/hubspot/amp.yaml
   //   - "readAndWriteSalesforce" for integrations/salesforce/amp.yaml
-  //   - "githubGists" for integrations/github/amp.yaml
+  //   - "githubIntegration" for integrations/github/amp.yaml
   const integration = "hubspotCRM";
 
   // You can learn more about the parameters in

@@ -35,5 +35,5 @@ This is a starter project for [Ampersand](https://www.withampersand.com). It con
 4. Deploy a specific integration by running `amp deploy integrations/hubspot -p <my-project-name>`, `amp deploy integrations/salesforce -p <my-project-name>`, or `amp deploy integrations/github -p <my-project-name>` in the root of the project.
 5. Update `src/App.tsx` with:
   - Your project name and API key.
-  - If you are not using the `hubspotCRM` integration, update the `integration` variable with the name of the integration folder inside the `integrations/` directory (use the `name` value from its `amp.yaml`, e.g. `readAndWriteSalesforce` or `githubGists`).
+  - If you are not using the `hubspotCRM` integration, update the `integration` variable with the name of the integration folder inside the `integrations/` directory (use the `name` value from its `amp.yaml`, e.g. `readAndWriteSalesforce` or `githubIntegration`).
 6. Run `npm run dev`.
