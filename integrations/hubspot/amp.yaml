@@ -1,7 +1,7 @@
 specVersion: 1.0.0
 integrations:
   - name: hubspotCRM # If you rename this, you need to update the integration name in src/App.tsx.
-    displayName: Hubspot CRM Integration
+    displayName: HubSpot CRM Integration
     provider: hubspot
     module: crm
     # Define the objects you want to read.
@@ -19,8 +19,8 @@ integrations:
             - fieldName: website
             - mapToName: priority
               mapToDisplayName: Priority
-              prompt: What field to you use to track how strategic this account is?
-          # Add `optionalFieldsAuto` to allow customers to pick any of their Contact fields,
+              prompt: What field do you use to track how strategic this account is?
+          # Add `optionalFieldsAuto` to allow customers to pick any of their Company fields,
           # Alternatively you can include a pre-chosen list in `optionalFields`.
           optionalFieldsAuto: all
           backfill:
@@ -42,6 +42,26 @@ integrations:
           backfill:
             defaultPeriod:
               fullHistory: true
+
+    # Subscribe to contacts for real-time updates.
+    # See https://docs.withampersand.com/subscribe-actions for more information.
+    # HubSpot needs extra setup in your HubSpot app, see
+    # https://docs.withampersand.com/provider-guides/hubspot#set-up-subscribe-actions
+    # The webhook subscriptions in your HubSpot app should match the events and
+    # watched fields below (for example, a property change on lifecyclestage).
+    subscribe:
+      objects:
+        - objectName: contacts
+          destination: defaultWebhook
+          inheritFieldsAndMapping: true # Inherit the fields and mapping from the read action.
+          createEvent:
+            enabled: always
+          updateEvent:
+            enabled: always
+            requiredWatchFields:
+              - lifecyclestage
+          deleteEvent:
+            enabled: always
 
     # Define the objects you want to write to.
     # See https://docs.withampersand.com/docs/write-actions for more information.
